@@ -1,0 +1,10 @@
+[
+  { "username": "capitaoGOAT", "password": "foguetao123", "role": "admin" },
+  { "username": "passageiro1", "password": "estrela1", "role": "user" },
+  { "username": "passageiro2", "password": "estrela2", "role": "user" },
+  { "username": "passageiro3", "password": "estrela3", "role": "user" },
+  { "username": "passageiro4", "password": "estrela4", "role": "user" },
+  { "username": "passageiro5", "password": "estrela5", "role": "user" },
+  { "username": "passageiro6", "password": "estrela6", "role": "user" },
+  { "username": "passageiro7", "password": "estrela7", "role": "user" }
+]

@@ -1,0 +1,11 @@
+{
+  "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js",
+  "/relatorio-trades": "pages/relatorio-trades.js",
+  "/contacto": "pages/contacto.js",
+  "/contas-operacao": "pages/contas-operacao.js",
+  "/diario-de-bordo": "pages/diario-de-bordo.js",
+  "/api/diario": "pages/api/diario.js",
+  "/": "pages/index.js"
+}

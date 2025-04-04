@@ -1,0 +1,16 @@
+{
+  "name": "goat-rocket-blog",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "^15.2.4",
+    "nodemailer": "^6.10.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-parallax-mouse": "^2.1.0"
+  }
+}
