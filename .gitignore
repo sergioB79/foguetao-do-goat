@@ -3,3 +3,4 @@
 .env.local
 .env.production
 data/contas
+node_modules
