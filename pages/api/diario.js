@@ -5,6 +5,8 @@ import path from 'path';
 
 const filePath = path.join(process.cwd(), 'data', 'diario.json');
 
+console.log('Método:', req.method, 'Body:', req.body);
+
 function lerPosts() {
   try {
     const file = fs.readFileSync(filePath, 'utf8');
