@@ -15,7 +15,11 @@ function lerPosts() {
 }
 
 function gravarPosts(posts) {
-  fs.writeFileSync(filePath, JSON.stringify(posts, null, 2));
+  try {
+    fs.writeFileSync(filePath, JSON.stringify(posts, null, 2));
+  } catch (err) {
+    console.error('Erro a gravar diário:', err);
+  }
 }
 
 export default function handler(req, res) {
