@@ -1,17 +1,14 @@
-// pages/api/diario.js
 import fs from 'fs';
 import path from 'path';
-import crypto from 'crypto';
 
 const filePath = path.join(process.cwd(), 'data', 'diario.json');
-
-console.log('Método:', req.method, 'Body:', req.body);
 
 function lerPosts() {
   try {
     const file = fs.readFileSync(filePath, 'utf8');
     return JSON.parse(file);
   } catch (e) {
+    console.error('Erro a ler diário:', e);
     return [];
   }
 }
@@ -21,36 +18,49 @@ function gravarPosts(posts) {
     fs.writeFileSync(filePath, JSON.stringify(posts, null, 2));
   } catch (err) {
     console.error('Erro a gravar diário:', err);
+    throw err;
   }
 }
 
+function gerarId() {
+  return Date.now().toString() + Math.random().toString(36).substr(2, 5);
+}
+
+function gerarData() {
+  return new Date().toLocaleString('pt-PT', { dateStyle: 'short', timeStyle: 'short' });
+}
+
 export default function handler(req, res) {
-  const posts = lerPosts();
+  let posts = lerPosts();
 
   if (req.method === 'GET') {
     return res.status(200).json(posts);
   }
 
   if (req.method === 'POST') {
-    const { titulo, texto, emoji } = req.body;
+    try {
+      const { titulo, texto, emoji } = req.body;
 
-    if (!titulo || !texto || !emoji) {
-      return res.status(400).json({ erro: 'Campos em falta.' });
+      if (!titulo || !texto || !emoji) {
+        return res.status(400).json({ erro: 'Campos em falta.' });
+      }
+
+      const novoPost = {
+        id: gerarId(),
+        data: gerarData(),
+        titulo,
+        texto,
+        emoji,
+        likes: 0
+      };
+
+      posts.unshift(novoPost);
+      gravarPosts(posts);
+
+      return res.status(200).json({ sucesso: true, post: novoPost });
+    } catch (err) {
+      return res.status(500).json({ erro: 'Erro ao gravar post' });
     }
-
-    const novoPost = {
-      id: Date.now().toString() + Math.random().toString(36).substr(2, 5),
-      data: new Date().toLocaleString('pt-PT', { dateStyle: 'short', timeStyle: 'short' }),
-      titulo,
-      texto,
-      emoji,
-      likes: 0
-    };
-
-    posts.unshift(novoPost);
-    gravarPosts(posts);
-
-    return res.status(200).json({ sucesso: true, post: novoPost });
   }
 
   if (req.method === 'PUT') {
@@ -68,8 +78,8 @@ export default function handler(req, res) {
   if (req.method === 'DELETE') {
     const { id } = req.body;
 
-    const novosPosts = posts.filter((p) => p.id !== id);
-    gravarPosts(novosPosts);
+    posts = posts.filter((p) => p.id !== id);
+    gravarPosts(posts);
 
     return res.status(200).json({ sucesso: true });
   }
