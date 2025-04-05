@@ -7,13 +7,13 @@ export default function RelatorioTrades() {
       <Head>
     	<title>📊 Relatórios de Trades - Foguetão do GOAT</title>
       </Head>
-      <h1>📊 Relatório de Trades</h1>
+      <h1>📊 Relatório Diário de Trades</h1>
       <p>
         Acede ao relatório externo da missão clicando no botão abaixo:
       </p>
       <p>
         <a
-          href="https://your-external-link.com"
+          href="http://18.195.234.74:8888/"
           target="_blank"
           rel="noopener noreferrer"
           style={{
