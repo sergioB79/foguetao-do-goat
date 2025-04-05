@@ -17,7 +17,7 @@ export default function RelatorioTrades() {
           ✈️ Milhas voadas desde o início da viagem (2.5k → fase1)
         </h2>
         <img
-          src="http://18.195.234.74:8888/ReportHistory-89325104.png"
+          src="/api/proxy-image"
           alt="Resumo de Milhas Voadas"
           style={{ maxWidth: '100%', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.15)' }}
         />
