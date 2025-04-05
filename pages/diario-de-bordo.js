@@ -138,11 +138,9 @@ export default function DiarioDeBordo() {
                 <h3>{post.emoji} {post.titulo}</h3>
                 <p><em>{post.data}</em></p>
                 <div dangerouslySetInnerHTML={{
-                  __html: post.texto
-                    .split('\n\n')
-                    .map(par => `<p>${par.replace(/\n/g, '<br>')}</p>`)
-                    .join('')
-                }} />
+                  __html: post.texto.replace(/\n/g, '<br />'),
+                  }}
+                />
                 <p>🚀 Likes: {post.likes}</p>
                 <button onClick={() => darLike(post.id)}>👍 Gostei</button>
                 {isAdmin() && (
