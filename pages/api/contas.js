@@ -1,25 +1,8 @@
-// pages/api/contas.js
+import { guardarJsonNoGithub } from '../../lib/github-utils';
 
-import fs from 'fs';
-import path from 'path';
-
-const filePath = path.join(process.cwd(), 'data', 'contas.json');
-
-function lerContas() {
-  try {
-    const file = fs.readFileSync(filePath, 'utf8');
-    return JSON.parse(file);
-  } catch (e) {
-    return [];
-  }
-}
-
-function gravarContas(contas) {
-  fs.writeFileSync(filePath, JSON.stringify(contas, null, 2));
-}
-
-export default function handler(req, res) {
-  const contas = lerContas();
+export default async function handler(req, res) {
+  const repoPath = 'data/contas.json';
+  const contas = await guardarJsonNoGithub.carregar(repoPath);
 
   if (req.method === 'GET') {
     return res.status(200).json(contas);
@@ -27,21 +10,23 @@ export default function handler(req, res) {
 
   if (req.method === 'POST') {
     const { descricao, valor, tipo } = req.body;
-
-    if (!descricao || !valor || !tipo) {
+    if (!descricao || !valor || !tipo)
       return res.status(400).json({ erro: 'Campos obrigatórios em falta.' });
-    }
 
     const novaEntrada = {
-      id: new Date().toISOString(),
-      data: new Date().toISOString().split('T')[0],
+      id: Date.now().toString(),
+      data: new Date().toLocaleString('pt-PT', {
+        dateStyle: 'short',
+        timeStyle: 'short',
+      }),
       descricao,
       valor: parseFloat(valor),
-      tipo
+      tipo,
     };
 
-    contas.unshift(novaEntrada);
-    gravarContas(contas);
+    const atualizados = [novaEntrada, ...contas];
+    await guardarJsonNoGithub.gravar(repoPath, atualizados);
+
     return res.status(200).json({ sucesso: true });
   }
 
@@ -51,14 +36,14 @@ export default function handler(req, res) {
     if (index === -1) return res.status(404).json({ erro: 'Registo não encontrado.' });
 
     contas[index] = { ...contas[index], descricao, valor: parseFloat(valor), tipo };
-    gravarContas(contas);
+    await guardarJsonNoGithub.gravar(repoPath, contas);
     return res.status(200).json({ sucesso: true });
   }
 
   if (req.method === 'DELETE') {
     const { id } = req.body;
-    const novas = contas.filter((c) => c.id !== id);
-    gravarContas(novas);
+    const atualizados = contas.filter((c) => c.id !== id);
+    await guardarJsonNoGithub.gravar(repoPath, atualizados);
     return res.status(200).json({ sucesso: true });
   }
 
