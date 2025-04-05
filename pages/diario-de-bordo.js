@@ -137,7 +137,7 @@ export default function DiarioDeBordo() {
               <div>
                 <h3>{post.emoji} {post.titulo}</h3>
                 <p><em>{post.data}</em></p>
-                <p>{post.texto}</p>
+                <p style={{ whiteSpace: 'pre-line' }}>{post.texto}</p>
                 <p>🚀 Likes: {post.likes}</p>
                 <button onClick={() => darLike(post.id)}>👍 Gostei</button>
                 {isAdmin() && (
