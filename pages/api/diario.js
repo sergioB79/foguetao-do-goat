@@ -1,6 +1,7 @@
 // pages/api/diario.js
 import fs from 'fs';
 import path from 'path';
+import crypto from 'crypto';
 
 const filePath = path.join(process.cwd(), 'data', 'diario.json');
 
@@ -39,7 +40,7 @@ export default function handler(req, res) {
 
     const novoPost = {
       id: Date.now().toString() + Math.random().toString(36).substr(2, 5),
-      data: crypto.randomUUID(),
+      data: new Date().toLocaleString('pt-PT', { dateStyle: 'short', timeStyle: 'short' }),
       titulo,
       texto,
       emoji,
