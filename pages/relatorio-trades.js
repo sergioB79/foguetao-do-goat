@@ -5,13 +5,25 @@ export default function RelatorioTrades() {
   return (
     <Layout>
       <Head>
-    	<title>📊 Relatórios de Trades - Foguetão do GOAT</title>
+        <title>📊 Relatórios de Trades - Foguetão do GOAT</title>
       </Head>
       <h1>📊 Relatório Diário de Trades</h1>
       <p>
         Acede ao relatório externo da missão clicando no botão abaixo:
       </p>
-      <p>
+
+      <div style={{ marginTop: '2rem', textAlign: 'center' }}>
+        <h2 style={{ fontSize: '1.2rem' }}>
+          ✈️ Milhas voadas desde o início da viagem (2.5k → fase1)
+        </h2>
+        <img
+          src="http://18.195.234.74:8888/ReportHistory-89325104.png"
+          alt="Resumo de Milhas Voada"
+          style={{ maxWidth: '100%', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.15)' }}
+        />
+      </div>
+
+      <p style={{ marginTop: '2rem', textAlign: 'center' }}>
         <a
           href="http://18.195.234.74:8888/"
           target="_blank"
@@ -19,12 +31,14 @@ export default function RelatorioTrades() {
           style={{
             color: '#00d4ff',
             fontWeight: 'bold',
-            textDecoration: 'underline'
+            textDecoration: 'underline',
+            fontSize: '1.1rem'
           }}
         >
-          🔗 Ver Relatório Externo
+          🔗 Ver Relatório Diário Externo
         </a>
       </p>
     </Layout>
   );
 }
+
