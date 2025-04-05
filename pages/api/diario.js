@@ -12,7 +12,7 @@ function lerPosts() {
     const file = fs.readFileSync(filePath, 'utf8');
     return JSON.parse(file);
   } catch (e) {
-    console.error('Erro a ler diário:', e);
+    console.error('❌ Erro a ler diário:', e);
     return [];
   }
 }
@@ -21,7 +21,7 @@ function gravarPosts(posts) {
   try {
     fs.writeFileSync(filePath, JSON.stringify(posts, null, 2));
   } catch (err) {
-    console.error('Erro a gravar diário:', err);
+    console.error('❌ Erro a gravar diário:', err);
     throw err;
   }
 }
@@ -31,10 +31,14 @@ function gerarId() {
 }
 
 function gerarData() {
-  return new Date().toLocaleString('pt-PT', { dateStyle: 'short', timeStyle: 'short' });
+  return new Date().toLocaleString('pt-PT', {
+    dateStyle: 'short',
+    timeStyle: 'short'
+  });
 }
 
 export default function handler(req, res) {
+  console.log('📩 Requisição recebida:', req.method, req.body);
   let posts = lerPosts();
 
   if (req.method === 'GET') {
@@ -63,42 +67,59 @@ export default function handler(req, res) {
 
       return res.status(200).json({ sucesso: true, post: novoPost });
     } catch (err) {
-      return res.status(500).json({ erro: 'Erro ao gravar post' });
+      console.error('🔥 ERRO no POST /api/diario:', err);
+      return res.status(500).json({ erro: 'Erro ao gravar post', detalhe: err.message });
     }
   }
 
   if (req.method === 'PUT') {
-    const { id, titulo, texto, emoji } = req.body;
+    try {
+      const { id, titulo, texto, emoji } = req.body;
 
-    const index = posts.findIndex((p) => p.id === id);
-    if (index === -1) return res.status(404).json({ erro: 'Post não encontrado' });
+      const index = posts.findIndex((p) => p.id === id);
+      if (index === -1) return res.status(404).json({ erro: 'Post não encontrado' });
 
-    posts[index] = { ...posts[index], titulo, texto, emoji };
-    gravarPosts(posts);
+      posts[index] = { ...posts[index], titulo, texto, emoji };
+      gravarPosts(posts);
 
-    return res.status(200).json({ sucesso: true });
+      return res.status(200).json({ sucesso: true });
+    } catch (err) {
+      console.error('🔥 ERRO no PUT /api/diario:', err);
+      return res.status(500).json({ erro: 'Erro ao editar post', detalhe: err.message });
+    }
   }
 
   if (req.method === 'DELETE') {
-    const { id } = req.body;
+    try {
+      const { id } = req.body;
 
-    posts = posts.filter((p) => p.id !== id);
-    gravarPosts(posts);
+      posts = posts.filter((p) => p.id !== id);
+      gravarPosts(posts);
 
-    return res.status(200).json({ sucesso: true });
+      return res.status(200).json({ sucesso: true });
+    } catch (err) {
+      console.error('🔥 ERRO no DELETE /api/diario:', err);
+      return res.status(500).json({ erro: 'Erro ao apagar post', detalhe: err.message });
+    }
   }
 
   if (req.method === 'PATCH') {
-    const { id } = req.body;
+    try {
+      const { id } = req.body;
 
-    const index = posts.findIndex((p) => p.id === id);
-    if (index === -1) return res.status(404).json({ erro: 'Post não encontrado' });
+      const index = posts.findIndex((p) => p.id === id);
+      if (index === -1) return res.status(404).json({ erro: 'Post não encontrado' });
 
-    posts[index].likes += 1;
-    gravarPosts(posts);
+      posts[index].likes += 1;
+      gravarPosts(posts);
 
-    return res.status(200).json({ sucesso: true });
+      return res.status(200).json({ sucesso: true });
+    } catch (err) {
+      console.error('🔥 ERRO no PATCH /api/diario:', err);
+      return res.status(500).json({ erro: 'Erro ao dar like', detalhe: err.message });
+    }
   }
 
-  return res.status(405).end(); // Método não permitido
+  // Método não permitido
+  return res.status(405).json({ erro: `Método ${req.method} não permitido.` });
 }
