@@ -1,10 +1,1 @@
-[
-  {
-    "id": "1743883606169",
-    "data": "05/04/25, 20:06",
-    "titulo": "3, 2, 1… Ignition Start!",
-    "texto": " 🛸 Bem-vindo a bordo do Foguetão do GOAT 🚀<br>\n\nEstamos prestes a levantar voo rumo a uma viagem incrível pelo espaço financeiro 🚀📈 com um objetivo ambicioso: 💰 5 a 10% de lucro por semana. Parece ficção científica? Talvez. Mas esta é a nossa missão.\n\n🧭 O Plano\nExplorar galáxias de oportunidades, aterrar em planetas exóticos como o GER40, XAUUSD ou Nasdaq 🌍🪐 e regressar à Terra com os bolsos cheios de meteoritos valiosos (a.k.a. lucros 💸).\n\n⚠️ Os Desafios\nA nave é nova 🆕.\nO capitão (👨‍🚀 este que vos escreve) ainda está a descobrir os botões.\nAs despesas? Nem sabemos bem ainda... A maioria dos serviços só apresenta a conta no fim do mês 💳, por isso estamos a navegar um bocado às cegas até lá 🌫️.\n\n🧩 O Sistema (por dentro da nave)\nDepois de muitas batalhas épicas com o código 💻⚔️ (copy/paste, erros, noites mal dormidas, resets e mais resets), finalmente o sistema está a funcionar... mas ainda bué confuso 😅.\n\n🔧 Este fim de semana vou pôr tudo em pausa 🛑, reiniciar o servidor (o IP muda e é logo um filme 🎞️), simplificar tudo e deixar a nave mais aerodinâmica.\nPara não repetir esta novela, temos tudo a correr numa VM na AWS ☁️, preparada para nunca cair.\n\n📡 Como funciona o motor do Foguetão?\n🔭 O TradingView está de olho em 12 ativos com 4 estratégias diferentes.\n🚨 Quando há sinal, envia alerta em JSON para o webhook na AWS.\n🎯 O webhook valida o sinal e envia para o servidor do broker, que executa o trade no MetaTrader.\n📝 A cada 5 minutos, um servidor FTP recolhe os logs e atualiza o relatório aqui na página.\nTudo automático. Tudo orquestrado. Uma sinfonia digital no espaço 🤖🎼\n\n🌠 Conclusão\nAinda está tudo meio caótico 🌀, mas encostem-se, relaxem e aproveitem a viagem.\n👨‍🚀 O comandante trata do resto.\n👁️‍🗨️ Pela janela do lado esquerdo, já se vê a Terra a ficar cada vez mais pequena…",
-    "emoji": "🚀",
-    "likes": 0
-  }
-]
+[]
