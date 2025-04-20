@@ -1,5 +1,5 @@
 export default async function handler(req, res) {
-  const url = "https://forexvm.ddns.net/relatorios/relatorio.png";
+  const url = "https://forexvm.ddns.net/relatorios/ReportHistory-89325104.png";
 
   try {
     const response = await fetch(url);
