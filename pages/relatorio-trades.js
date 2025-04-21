@@ -25,7 +25,7 @@ export default function RelatorioTrades() {
 
       <p style={{ marginTop: '2rem', textAlign: 'center' }}>
         <a
-          href="http://18.195.234.74:8888/"
+          href="https://forexvm.ddns.net/relatorios/"
           target="_blank"
           rel="noopener noreferrer"
           style={{
