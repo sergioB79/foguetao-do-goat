@@ -25,7 +25,7 @@ export default function RelatorioTrades() {
 
       <p style={{ marginTop: '2rem', textAlign: 'center' }}>
         <a
-          href="https://forexvm.ddns.net/relatorios/"
+          href="https://forexvm.ddns.net/relatorios/ReportHistory-89325104.html"
           target="_blank"
           rel="noopener noreferrer"
           style={{
